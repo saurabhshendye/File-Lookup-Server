@@ -4,6 +4,8 @@
 
 package endPoints;
 
+import util.argumentParser;
+
 import java.io.File;
 import java.io.IOException;
 import java.net.ServerSocket;
@@ -28,6 +30,8 @@ public class Server implements Runnable
 
     public static void main(String [] args)
     {
+        argumentParser argParse = new argumentParser(args);
+
         //Server server = new Server();
     }
 }
