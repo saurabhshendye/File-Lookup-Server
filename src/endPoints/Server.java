@@ -36,7 +36,7 @@ public class Server
             while (true)
             {
                 Socket clientSocket = server.serverSocket.accept();
-                Thread receiver = new TCPReceiver();
+                Thread receiver = new TCPReceiver(clientSocket);
                 receiver.start();
             }
         }
