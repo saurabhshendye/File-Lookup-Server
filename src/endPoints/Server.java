@@ -31,7 +31,14 @@ public class Server implements Runnable
     public static void main(String [] args)
     {
         argumentParser argParse = new argumentParser(args);
+        if (argParse.isValid())
+        {
 
+        }
+        else
+        {
+            System.out.println("Invalid Arguments");
+        }
         //Server server = new Server();
     }
 }
