@@ -21,6 +21,33 @@ public class TCPReceiver extends Thread
 
     public void run()
     {
-
+        while (S != null)
+        {
+            try
+            {
+                int dLen = din.readInt();
+                byte[] data = new byte[dLen];
+                din.readFully(data);
+//                WireFormatWidget WireFormat = new WireFormatWidget(data);
+//                int type = WireFormat.getType();
+//                switch (type)
+//                {
+//                    case 0: WireFormat.register();                      // 0 for File Request
+//                        break;
+//                    default: System.out.println("Unknown Message");
+//                        break;
+//                }
+            }
+            catch (IOException e1)
+            {
+                System.out.println("Error Message: " +e1.getMessage());
+                break;
+            }
+//            catch (InterruptedException e)
+//            {
+//                e.printStackTrace();
+//                break;
+//            }
+        }
     }
 }
