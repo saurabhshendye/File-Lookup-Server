@@ -4,7 +4,23 @@
 
 package util;
 
+import java.io.File;
+
 public class findFile
 {
+    private File path;
+    static {
 
+    }
+//    private static final findFile ff = new findFile()
+
+    private findFile(File path)
+    {
+        this.path = path;
+    }
+
+//    public findFile getInstance()
+//    {
+//
+//    }
 }
