@@ -9,18 +9,19 @@ import java.io.File;
 public class findFile
 {
     private File path;
-    static {
+    private static final findFile ff = new findFile();
+
+    private findFile()
+    {
 
     }
-//    private static final findFile ff = new findFile()
 
-    private findFile(File path)
+    public void setPath(File path)
     {
         this.path = path;
     }
-
-//    public findFile getInstance()
-//    {
-//
-//    }
+    public static findFile getInstance()
+    {
+        return ff;
+    }
 }

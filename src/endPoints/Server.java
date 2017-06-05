@@ -6,6 +6,7 @@ package endPoints;
 
 import Transport.TCPReceiver;
 import util.argumentParser;
+import util.findFile;
 
 import java.io.File;
 import java.io.IOException;
@@ -15,13 +16,13 @@ import java.net.Socket;
 public class Server
 {
     private int port;
-    private File path;
+//    private File path;
     private ServerSocket serverSocket;
 
-    private Server(int port, File path) throws IOException
+    private Server(int port) throws IOException
     {
         this.port = port;
-        this.path = path;
+//        this.path = path;
         this.serverSocket = new ServerSocket(port,5);
     }
 
@@ -31,7 +32,9 @@ public class Server
         argumentParser argParse = new argumentParser(args);
         if (argParse.isValid())
         {
-            Server server = new Server(argParse.port, argParse.path);
+            Server server = new Server(argParse.port);
+            findFile ff = findFile.getInstance();
+            ff.setPath(argParse.path);
 
             while (true)
             {
@@ -44,6 +47,5 @@ public class Server
         {
             System.out.println("Invalid Arguments");
         }
-
     }
 }
