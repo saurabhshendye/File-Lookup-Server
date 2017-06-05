@@ -32,13 +32,13 @@ public class TCPReceiver extends Thread
                 din.readFully(data);
                 WireFormatWidget WireFormat = new WireFormatWidget(data);
                 int type = WireFormat.getType();
-//                switch (type)
-//                {
-//                    case 0: WireFormat.register();                      // 0 for File Request
-//                        break;
-//                    default: System.out.println("Unknown Message");
-//                        break;
-//                }
+                switch (type)
+                {
+                    case 0: WireFormat.requestFile();                      // 0 for File Request
+                        break;
+                    default: System.out.println("Unknown Message");
+                        break;
+                }
             }
             catch (IOException e1)
             {

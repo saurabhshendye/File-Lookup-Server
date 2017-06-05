@@ -35,4 +35,9 @@ public class WireFormatWidget
     {
         return type;
     }
+
+    public void requestFile()
+    {
+
+    }
 }
