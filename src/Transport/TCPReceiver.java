@@ -4,6 +4,8 @@
 
 package Transport;
 
+import WireFormats.WireFormatWidget;
+
 import java.io.DataInputStream;
 import java.io.IOException;
 import java.net.Socket;
@@ -28,8 +30,8 @@ public class TCPReceiver extends Thread
                 int dLen = din.readInt();
                 byte[] data = new byte[dLen];
                 din.readFully(data);
-//                WireFormatWidget WireFormat = new WireFormatWidget(data);
-//                int type = WireFormat.getType();
+                WireFormatWidget WireFormat = new WireFormatWidget(data);
+                int type = WireFormat.getType();
 //                switch (type)
 //                {
 //                    case 0: WireFormat.register();                      // 0 for File Request
