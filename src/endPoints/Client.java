@@ -17,7 +17,6 @@ public class Client
         if (parser.isValid())
         {
             Socket clientSocket = new Socket(parser.hostName, parser.port);
-
         }
     }
 }
