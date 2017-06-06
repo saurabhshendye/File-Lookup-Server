@@ -4,6 +4,7 @@
 
 package endPoints;
 
+import Transport.TCPReceiver;
 import Transport.TCPSender;
 import WireFormats.fileRequest;
 import util.clientArgParser;
@@ -25,6 +26,9 @@ public class Client
             byte [] WfRequest = request.getByteArray();
 
             sender.send_and_maintain(WfRequest);
+
+            TCPReceiver receiver = new TCPReceiver(clientSocket);
+            receiver.start();
         }
     }
 }
