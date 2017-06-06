@@ -13,6 +13,7 @@ import java.io.IOException;
 public class fileRequest
 {
     private String name;
+    private int type = 0;
 
     public fileRequest(String fileName)
     {
@@ -25,7 +26,13 @@ public class fileRequest
         ByteArrayOutputStream baopstream = new ByteArrayOutputStream();
         DataOutputStream dout = new DataOutputStream(new BufferedOutputStream(baopstream));
 
+        byte[] array = this.name.getBytes();
+        int Len = array.length;
 
+        dout.writeInt(type);
+        dout.writeInt(Len);
+        dout.write(array);
+        dout.flush();
 
         byte[] marshaled = baopstream.toByteArray();
 
