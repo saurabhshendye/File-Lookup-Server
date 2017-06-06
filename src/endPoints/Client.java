@@ -4,6 +4,8 @@
 
 package endPoints;
 
+import Transport.TCPSender;
+import WireFormats.fileRequest;
 import util.clientArgParser;
 
 import java.io.IOException;
@@ -17,6 +19,12 @@ public class Client
         if (parser.isValid())
         {
             Socket clientSocket = new Socket(parser.hostName, parser.port);
+            TCPSender sender  = new TCPSender(clientSocket);
+
+            fileRequest request = new fileRequest(parser.fileName);
+            byte [] WfRequest = request.getByteArray();
+
+            sender.send_and_maintain(WfRequest);
         }
     }
 }
