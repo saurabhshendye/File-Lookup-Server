@@ -9,8 +9,9 @@ import java.io.File;
 public class argumentParser
 {
     public int port;
-    public File path;
-    public String [] args;
+    private static File path;
+    private String [] args;
+
 
     public argumentParser(String [] args)
     {
@@ -26,7 +27,7 @@ public class argumentParser
             if (port > 1023)
             {
                 // here we also need to check whether the path is valid or not
-                this.path = new File(args[1]);
+                path = new File(args[1]);
                 return true;
             }
             else
@@ -38,5 +39,10 @@ public class argumentParser
         {
             return false;
         }
+    }
+
+    public static File getPath()
+    {
+        return path;
     }
 }

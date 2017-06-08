@@ -4,6 +4,7 @@
 
 package WireFormats;
 
+import util.argumentParser;
 import util.findFile;
 
 import java.io.BufferedInputStream;
@@ -41,7 +42,17 @@ public class WireFormatWidget
     public void requestFile()
     {
         String name = new String(identifier);
-        findFile ff = findFile.getInstance();
+        findFile ff = new findFile();
+        ff.setPath(argumentParser.getPath());
         ff.fileLookup(name, ff.getPath());
+        if(ff.isPresent())
+        {
+
+        }
+        else
+        {
+
+        }
+
     }
 }

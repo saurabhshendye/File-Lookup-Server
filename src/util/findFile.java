@@ -9,16 +9,17 @@ import java.io.File;
 public class findFile
 {
     private File path = null;
-    private static final findFile ff = new findFile();
-    private static boolean flag = false;
-    private static File P;
+//    private static final findFile ff = new findFile();
+    private boolean flag;
+    private File P;
 
-    private findFile()
+    public findFile()
     {
-
+        this.flag = false;
+        this.P = null;
     }
 
-    public synchronized void fileLookup(String name, File file)
+    public void fileLookup(String name, File file)
     {
         File[] list = file.listFiles();
         if(list!=null)
@@ -31,7 +32,12 @@ public class findFile
                 else if (name.equalsIgnoreCase(fil.getName()))
                 {
                     P = fil.getParentFile();
-                    flag = true;
+                    System.out.println("Found..");
+                    if (P.canRead())
+                    {
+                        System.out.println("Can read");
+                    }
+                    this.flag = true;
                 }
             }
     }
@@ -45,9 +51,13 @@ public class findFile
     {
         return this.path;
     }
-    public static findFile getInstance()
-    {
-        return ff;
-    }
+//    public static findFile getInstance()
+//    {
+//        return ff;
+//    }
 
+    public boolean isPresent()
+    {
+        return flag;
+    }
 }
