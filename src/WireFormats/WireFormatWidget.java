@@ -4,10 +4,12 @@
 
 package WireFormats;
 
-import util.argumentParser;
-import util.findFile;
+import endPoints.Server;
 
-import java.io.*;
+import java.io.BufferedInputStream;
+import java.io.ByteArrayInputStream;
+import java.io.DataInputStream;
+import java.io.IOException;
 
 public class WireFormatWidget
 {
@@ -38,20 +40,17 @@ public class WireFormatWidget
 
     public void requestFile() throws IOException {
         String name = new String(identifier);
-        findFile ff = new findFile();
-        ff.setPath(argumentParser.getPath());
-        ff.fileLookup(name, ff.getPath());
-        if(ff.isPresent())
-        {
-            RandomAccessFile rf = new RandomAccessFile(ff.getPath(), "r");
-            byte [] b = new byte[(int) rf.length()];
-            rf.readFully(b);
-            System.out.println("Byte Array Created");
-        }
-        else
-        {
+        Server tempServer = Server.getInstance();
+        tempServer.parseRequest(name);
+    }
 
-        }
+    public void requestResponse()
+    {
+
+    }
+
+    public void errorResponse()
+    {
 
     }
 }

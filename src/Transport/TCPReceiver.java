@@ -36,6 +36,10 @@ public class TCPReceiver extends Thread
                 {
                     case 0: WireFormat.requestFile();                      // 0 for File Request
                         break;
+                    case 1: WireFormat.requestResponse();                   // 1 for successful file transfer
+                        break;
+                    case 2: WireFormat.errorResponse();                     // 2 for file not found exception
+                        break;
                     default: System.out.println("Unknown Message");
                         break;
                 }
