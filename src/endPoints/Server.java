@@ -5,16 +5,21 @@
 package endPoints;
 
 import Transport.TCPReceiver;
+import Transport.TCPSender;
 import util.argumentParser;
 
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.concurrent.ConcurrentHashMap;
 
 public class Server
 {
     private int port;
     private ServerSocket serverSocket;
+
+    private static ConcurrentHashMap<String, TCPSender> senderMap = new ConcurrentHashMap<>();
+
 
     private Server(int port) throws IOException
     {
@@ -45,6 +50,8 @@ public class Server
                 Socket clientSocket = server.serverSocket.accept();
                 Thread receiver = new TCPReceiver(clientSocket);
                 receiver.start();
+                TCPSender sender = new TCPSender(clientSocket);
+
             }
         }
         else

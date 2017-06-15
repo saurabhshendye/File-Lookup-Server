@@ -9,7 +9,6 @@ import java.io.File;
 public class findFile
 {
     private File path = null;
-//    private static final findFile ff = new findFile();
     private boolean flag;
     private File P;
 
@@ -31,8 +30,11 @@ public class findFile
                 }
                 else if (name.equalsIgnoreCase(fil.getName()))
                 {
-                    P = fil.getParentFile();
+                    P = fil;
+                    path = fil.getAbsoluteFile();
                     System.out.println("Found..");
+                    System.out.println(P.getName());
+                    System.out.println(P.getAbsoluteFile());
                     if (P.canRead())
                     {
                         System.out.println("Can read");
@@ -41,6 +43,7 @@ public class findFile
                 }
             }
     }
+
 
     public void setPath(File path)
     {
@@ -51,10 +54,6 @@ public class findFile
     {
         return this.path;
     }
-//    public static findFile getInstance()
-//    {
-//        return ff;
-//    }
 
     public boolean isPresent()
     {

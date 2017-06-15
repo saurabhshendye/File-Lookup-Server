@@ -7,10 +7,7 @@ package WireFormats;
 import util.argumentParser;
 import util.findFile;
 
-import java.io.BufferedInputStream;
-import java.io.ByteArrayInputStream;
-import java.io.DataInputStream;
-import java.io.IOException;
+import java.io.*;
 
 public class WireFormatWidget
 {
@@ -39,15 +36,17 @@ public class WireFormatWidget
         return type;
     }
 
-    public void requestFile()
-    {
+    public void requestFile() throws IOException {
         String name = new String(identifier);
         findFile ff = new findFile();
         ff.setPath(argumentParser.getPath());
         ff.fileLookup(name, ff.getPath());
         if(ff.isPresent())
         {
-
+            RandomAccessFile rf = new RandomAccessFile(ff.getPath(), "r");
+            byte [] b = new byte[(int) rf.length()];
+            rf.readFully(b);
+            System.out.println("Byte Array Created");
         }
         else
         {
