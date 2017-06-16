@@ -15,6 +15,11 @@ public class fileRequest
     private String name;
     private int type = 0;
 
+    public fileRequest(String fileName, boolean flag)
+    {
+
+    }
+
     public fileRequest(String fileName)
     {
         this.name = fileName;

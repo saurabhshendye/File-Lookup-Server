@@ -19,10 +19,14 @@ public class Server
 {
     private int port;
     private ServerSocket serverSocket;
-    private static Server server = null;
 
+
+    private static Server server = null;
     private static ConcurrentHashMap<String, TCPSender> senderMap = new ConcurrentHashMap<>();
+    private static ConcurrentHashMap<String, byte[]> cache = new ConcurrentHashMap<>();
     private static TCPSender sender;
+    private static int cacheSize = 0;
+    private static ConcurrentHashMap<String, Integer> cacheStats = new ConcurrentHashMap<>();
 
 
     private Server(int port) throws IOException
@@ -69,23 +73,57 @@ public class Server
         return server;
     }
 
-    public void parseRequest(String fileName) throws IOException {
-        findFile ff = new findFile();
-        ff.setPath(argumentParser.getPath());
-        ff.fileLookup(fileName, ff.getPath());
-        if(ff.isPresent())
+    public void parseRequest(String fileName) throws IOException
+    {
+        if (cache.containsKey(fileName))
         {
-            fileResponse fr = new fileResponse(ff.getPath());
-            System.out.println("Byte Array Created");
-//            sender.sendAndClose(fr.getByteArray());
-            sender.send_and_maintain(fr.getByteArray());
+            System.out.println("Found in cache");
+            sender.send_and_maintain(cache.get(fileName));
+            Integer temp = cacheStats.get(fileName);
+            temp += 1;
+            cacheStats.put(fileName, temp);
             System.out.println("Data sent");
         }
         else
         {
+            findFile ff = new findFile();
+            ff.setPath(argumentParser.getPath());
+            ff.fileLookup(fileName, ff.getPath());
+            if(ff.isPresent())
+            {
+                fileResponse fr = new fileResponse(ff.getPath());
+                System.out.println("Byte Array Created");
+                sender.sendAndClose(fr.getByteArray());
+                System.out.println("Data sent");
+                server.cacheEntry(fileName, fr);
+            }
+            else
+            {
 
+            }
+        }
+    }
+
+    private void cacheEntry(String fileName, fileResponse fr) throws IOException
+    {
+        byte[] data = fr.getByteArray();
+        if (cacheSize +data.length > 67108864)
+        {
+            // removing the least accessed file from the
+            // cache so as to prevent cache overflow
+
+
+        }
+        else
+        {
+            // Adding the files to cache and updating the
+            // cacheStats
+            cacheSize += data.length;
+            cache.put(fileName, data);
+            cacheStats.put(fileName, 1);
         }
 
     }
+
 
 }
