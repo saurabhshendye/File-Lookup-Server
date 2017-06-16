@@ -77,7 +77,9 @@ public class Server
         {
             fileResponse fr = new fileResponse(ff.getPath());
             System.out.println("Byte Array Created");
-            sender.sendAndClose(fr.getByteArray());
+//            sender.sendAndClose(fr.getByteArray());
+            sender.send_and_maintain(fr.getByteArray());
+            System.out.println("Data sent");
         }
         else
         {

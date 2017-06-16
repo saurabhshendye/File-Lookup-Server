@@ -45,8 +45,9 @@ public class WireFormatWidget
         tempServer.parseRequest(name);
     }
 
-    public void requestResponse()
+    public void requestResponse() throws IOException
     {
+        System.out.println("Data Received");
         Client client = Client.getClientInstance();
         client.parseResponse(this.identifier);
     }

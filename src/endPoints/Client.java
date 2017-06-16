@@ -56,10 +56,11 @@ public class Client
 
     public void parseResponse(byte [] byteArray) throws IOException
     {
-        String fileName = path + name;
+        String fileName = path + "/" + name;
         RandomAccessFile wf = new RandomAccessFile(fileName, "rw");
 //            FileOutputStream fos = new FileOutputStream(name);
 //        String content = "writing to a file";
         wf.write(byteArray);
+        System.out.println("File Written");
     }
 }
