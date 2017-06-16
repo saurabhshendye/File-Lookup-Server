@@ -6,6 +6,7 @@ package endPoints;
 
 import Transport.TCPReceiver;
 import Transport.TCPSender;
+import WireFormats.fileNotFound;
 import WireFormats.fileResponse;
 import util.argumentParser;
 import util.findFile;
@@ -101,6 +102,9 @@ public class Server
             else
             {
                 // Response when file is not found
+                fileNotFound notFound = new fileNotFound();
+                System.out.println("The requested file is not present");
+                sender.sendAndClose(notFound.getByteArray());
             }
         }
     }
