@@ -49,11 +49,6 @@ public class TCPReceiver extends Thread
                 System.out.println("Error Message: " +e1.getMessage());
                 break;
             }
-//            catch (InterruptedException e)
-//            {
-//                e.printStackTrace();
-//                break;
-//            }
         }
     }
 }

@@ -4,12 +4,11 @@
 
 package util;
 
-import java.io.File;
-
 public class clientArgParser
 {
     public int port;
-    public File path;
+//    public File path;
+    public String path;
     public String fileName;
     public String hostName;
     public String [] args;
@@ -28,7 +27,8 @@ public class clientArgParser
             if (port > 1023)
             {
                 // here we also need to check whether the path is valid or not
-                this.path = new File(args[3]);
+//                this.path = new File(args[3]);
+                this.path = args[3];
                 this.fileName = args[2];
                 this.hostName = args[0];
                 return true;

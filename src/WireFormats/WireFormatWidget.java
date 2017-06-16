@@ -4,6 +4,7 @@
 
 package WireFormats;
 
+import endPoints.Client;
 import endPoints.Server;
 
 import java.io.BufferedInputStream;
@@ -46,7 +47,8 @@ public class WireFormatWidget
 
     public void requestResponse()
     {
-
+        Client client = Client.getClientInstance();
+        client.parseResponse(this.identifier);
     }
 
     public void errorResponse()
