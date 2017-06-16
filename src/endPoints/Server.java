@@ -13,6 +13,7 @@ import util.findFile;
 import java.io.IOException;
 import java.net.ServerSocket;
 import java.net.Socket;
+import java.util.Iterator;
 import java.util.concurrent.ConcurrentHashMap;
 
 public class Server
@@ -99,7 +100,7 @@ public class Server
             }
             else
             {
-
+                // Response when file is not found
             }
         }
     }
@@ -107,12 +108,38 @@ public class Server
     private void cacheEntry(String fileName, fileResponse fr) throws IOException
     {
         byte[] data = fr.getByteArray();
-        if (cacheSize +data.length > 67108864)
+        if (cacheSize + data.length > 67108864)
         {
             // removing the least accessed file from the
             // cache so as to prevent cache overflow
+            OuterLoop:
+            while (true)
+            {
+                Iterator it = cacheStats.entrySet().iterator();
+                int min = Integer.MAX_VALUE;
+                while (it.hasNext())
+                {
+                    ConcurrentHashMap.Entry entry = (ConcurrentHashMap.Entry) it.next();
+                    if (min > (int)entry.getValue())
+                    {
+                        // Subtracting the value from size
+                        Integer value = (int)entry.getValue();
+                        cacheSize -= value;
 
+                        // Removing the key from the hashMap
+                        String key = (String) entry.getKey();
+                        cacheStats.remove(key);
+                    }
+                    if (cacheSize + data.length < 67108864)
+                    {
+                        break OuterLoop;
+                    }
 
+                }
+            }
+            cacheSize += data.length;
+            cache.put(fileName, data);
+            cacheStats.put(fileName, 1);
         }
         else
         {
