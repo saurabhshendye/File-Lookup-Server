@@ -1,7 +1,6 @@
 # FileLookupServer
 
-This is a simple Client Server based architecture to look up for a file (in linux based system) in a given directory.
-Server is equipped to cache files up to 64MB to improve perfromance. Caching is based on the frequency of the of the file being requested.
+This is a simple Client Server based architecture to look up for a file (in linux based system) and transfer (if found)in a given directory. Server is equipped to cache files up to 64MB to improve perfromance. Caching is based on the frequency of the of the file being requested.
 
 
 
