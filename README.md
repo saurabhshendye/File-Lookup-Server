@@ -14,8 +14,8 @@ Step IV: Go to 'bin' folder
 
 For Server:
 
-	java endPoints.Server <port Number (> 1024)> <Directory>
+	java endPoints.Server <port Number> <Directory>
 
 For Client:
 
-	java endPoints.Client <Server host> <Server port> <file name> <Directory to store the requested file>
+	java endPoints.Client <Server host> <Server port> <file name> <Path to store the requested file>
